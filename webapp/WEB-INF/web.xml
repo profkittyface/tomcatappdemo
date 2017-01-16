@@ -1,0 +1,13 @@
+<web-app>
+
+<servlet>
+   <servlet-name>TomcatApp</servlet-name>
+   <servlet-class>com.tomcatappdemo.TomcatApp</servlet-class>
+</servlet>
+
+<servlet-mapping>
+   <servlet-name>TomcatApp</servlet-name>
+   <url-pattern>/app</url-pattern>
+</servlet-mapping>
+
+</web-app>

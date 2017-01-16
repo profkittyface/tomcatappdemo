@@ -1,0 +1,33 @@
+apply plugin: 'java'
+
+repositories {
+    mavenCentral()
+}
+
+
+dependencies {
+	compile group: 'javax.servlet', name: 'servlet-api', version: '2.5'
+}
+
+
+sourceSets {
+	main {
+		java {
+			srcDirs = [
+			'src/main/java'
+			]
+		}
+	}
+}
+
+
+task copyJars(type:Sync) {
+    from configurations.compile
+    from configurations.runtime
+    into "webapp/WEB-INF/lib"
+}
+
+task copyClasses(type:Copy) {
+    from sourceSets.main.output.classesDir
+    into "webapp/WEB-INF/classes"
+}
