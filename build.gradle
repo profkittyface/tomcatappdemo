@@ -19,6 +19,7 @@ sourceSets {
 }
 
 task deploy
+deploy.dependsOn "build"
 deploy.dependsOn "copyJars"
 deploy.dependsOn "copyClasses"
 
