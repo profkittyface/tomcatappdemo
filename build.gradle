@@ -4,11 +4,9 @@ repositories {
     mavenCentral()
 }
 
-
 dependencies {
 	compile group: 'javax.servlet', name: 'servlet-api', version: '2.5'
 }
-
 
 sourceSets {
 	main {
@@ -20,6 +18,9 @@ sourceSets {
 	}
 }
 
+task deploy
+deploy.dependsOn "copyJars"
+deploy.dependsOn "copyClasses"
 
 task copyJars(type:Sync) {
     from configurations.compile

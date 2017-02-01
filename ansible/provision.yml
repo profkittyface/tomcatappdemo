@@ -1,0 +1,40 @@
+---
+- name: Configure instance(s)
+  hosts: "{{ hosts }}"
+  become: True
+  gather_facts: True
+
+  tasks:
+    - name: Add Webupd8
+      apt_repository: repo='ppa:webupd8team/java'
+      become_user: root
+
+    - name: Accept Oracle License
+      debconf: name=oracle-java8-installer question='shared/accepted-oracle-license-v1-1' value='true' vtype='select'
+
+    - name: Install packages
+      action: apt pkg={{item}} state=installed update_cache=yes
+      with_items:
+        - htop
+        - tmux
+        - iftop
+        - oracle-java8-set-default
+        - build-essential
+        - nmap
+        - tomcat8
+
+    - name: Add App Group
+      group: name=app state=present
+
+    - name: Add App User
+      user:
+        name: app
+        uid: 500
+        comment: "App User"
+        shell: /bin/bash
+        group: app
+        state: present
+      become_user: root
+
+    - name: Set ubuntu password
+      shell: echo "ubuntu:ubuntu" | chpasswd

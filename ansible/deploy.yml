@@ -1,0 +1,18 @@
+---
+- hosts: "{{ hosts }}"
+  become: True
+  gather_facts: False
+  vars:
+# Set me
+#    deploy_dir: /Users/ahunt/repos/tomcatappdemo/webapp/
+
+
+  tasks:
+    - name: Shutdown Tomcat
+      service: name=tomcat8 state=stopped
+
+    - name: Sync Contents
+      synchronize: src="{{ deploy_dir }}" dest=/var/lib/tomcat8/webapps/ROOT delete=True
+
+    - name: Start Tomcat
+      service: name=tomcat8 state=started

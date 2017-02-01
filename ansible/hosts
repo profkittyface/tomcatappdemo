@@ -1,0 +1,4 @@
+# Ansible Hosts File
+# hostname ansible_user ansible_host
+# Example:
+# tomcatapp ansible_user=ubuntu ansible_host=54.173.35.183
